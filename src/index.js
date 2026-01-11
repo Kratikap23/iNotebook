@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import NoteState from './context/notes/NoteState';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
