@@ -3,13 +3,13 @@ import AddNote from "./AddNote";
 
 
 
-const Home = () => {
+const Home = ({ showAlert }) => {
  
   return (
     <div >
       
 
-      <Notes/>
+      <Notes showAlert= {showAlert}/>
     </div>
   );
 };
