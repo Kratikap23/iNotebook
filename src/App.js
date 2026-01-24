@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -10,7 +10,8 @@ import Signup from './components/Signup';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Alert from './components/Alert';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import PrivateRoute from "./components/PrivateRoute";
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
       setAlert(null);
     }, 1000)
   }
+  useEffect(() => {
+  localStorage.removeItem("token");
+}, []);
+
   return (
     <>
 
@@ -31,8 +36,14 @@ function App() {
       <Navbar />
       <Alert alert={alert}/>
       <div className="container">
+        
         <Routes>
-          <Route exact path="/" element={<Home showAlert={showAlert}/>} />
+          <Route path="/" element={<Navigate to="/login" replace/>} />
+          <Route
+    path="/home" element={
+      <PrivateRoute>
+        <Home />
+      </PrivateRoute> }/>
           <Route exact path="/about" element={<About user={{ name: "Kratika" }} />} />
           <Route exact path="/login" element={<Login showAlert={showAlert} />} />
           <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
